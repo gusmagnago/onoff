@@ -6,6 +6,7 @@ import Select from './components/select/Select';
 import { useQuery } from 'react-query';
 import { IShop } from './utils/api/types';
 import { fetchShops } from './utils/api';
+import ShoppingList from './components/shopping-list/ShoppingList';
 
 const App = () => {
   const [inputValue, setInputValue] = useState<string>('');
@@ -27,6 +28,22 @@ const App = () => {
     setOpen(!open);
   };
 
+  const column = [
+    { name: 'shopName', heading: 'shopName' },
+    { name: 'itemName', heading: 'itemName' },
+    { name: 'action', heading: '' },
+  ];
+
+  // create this to see the table display
+  const shoppingList = [
+    { itemName: 'Milk', shopName: 'Maxima', action: <button>delete</button> },
+    {
+      itemName: 'Milkeeeee',
+      shopName: 'Maxima',
+      action: <button>delete</button>,
+    },
+  ];
+
   return (
     <div className='shopping-cart-wrapper'>
       <ShoppingCartHeader
@@ -46,6 +63,7 @@ const App = () => {
           </>
         }
       />
+      <ShoppingList column={column} data={shoppingList} />
     </div>
   );
 };
