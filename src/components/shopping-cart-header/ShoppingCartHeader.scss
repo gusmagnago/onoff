@@ -18,11 +18,13 @@
   }
 
   & button {
-    &:hover {
-      background-color: map.get($theme-colors, 'white');
-      color: map.get($theme-colors, 'addColor');
-      border: 1px solid;
-      border-color: map.get($theme-colors, 'addColor');
+    &:not(:disabled) {
+      &:hover {
+        background-color: map.get($theme-colors, 'white');
+        color: map.get($theme-colors, 'addColor');
+        border: 1px solid;
+        border-color: map.get($theme-colors, 'addColor');
+      }
     }
   }
 }

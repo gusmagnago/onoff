@@ -17,7 +17,11 @@
   &:first-of-type {
     padding-left: 40px;
   }
+}
 
+.action-row {
+  display: flex;
+  justify-content: center;
   button {
     background-color: transparent;
     text-transform: capitalize;

@@ -7,17 +7,23 @@ import { useQuery } from 'react-query';
 import { IShop } from './utils/api/types';
 import { fetchShops } from './utils/api';
 import ShoppingList from './components/shopping-list/ShoppingList';
+import { useAppDispatch, useAppSelector } from './redux/store';
+import { addItem, removeItem } from './redux/features/shoppingCartSlice';
 
 const App = () => {
   const [inputValue, setInputValue] = useState<string>('');
   const [open, setOpen] = useState<boolean>(false);
-
-  const [placeholder, setPlaceholder] = useState<string>('Select shop');
-
+  const selectPlaceholder = 'Select shop';
+  const [placeholder, setPlaceholder] = useState<string>(selectPlaceholder);
+  const [id, setId] = useState<number>(0);
   const { data, isLoading } = useQuery<IShop[]>('stores', fetchShops);
+
+  const dispatch = useAppDispatch();
 
   const isInputEmpty =
     typeof inputValue === 'string' && inputValue.length === 0;
+
+  const isSelectEmpty = placeholder === selectPlaceholder;
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
@@ -28,21 +34,29 @@ const App = () => {
     setOpen(!open);
   };
 
+  const handleRemoveItem = () => {
+    dispatch(removeItem({ id }));
+  };
+
+  const handleAddItem = () => {
+    setId((prev) => prev + 1);
+    dispatch(
+      addItem({
+        itemId: id,
+        itemName: inputValue,
+        shopName: placeholder,
+      })
+    );
+    setInputValue('');
+    setPlaceholder(selectPlaceholder);
+  };
+
   const column = [
     { name: 'itemName', heading: 'itemName' },
     { name: 'shopName', heading: 'shopName' },
-    { name: 'action', heading: '' },
   ];
 
-  // create this to see the table display
-  const shoppingList = [
-    { itemName: 'Milk', shopName: 'Maxima', action: <button>delete</button> },
-    {
-      itemName: 'Milkeeeee',
-      shopName: 'Maxima',
-      action: <button>delete</button>,
-    },
-  ];
+  const shoppingList = useAppSelector((state) => state.items);
 
   return (
     <div className='shopping-cart-wrapper'>
@@ -60,11 +74,21 @@ const App = () => {
               disabled={isInputEmpty}
               isLoading={isLoading}
             />
-            <button className='add-bttn'>Add</button>
+            <button
+              className='add-bttn'
+              onClick={handleAddItem}
+              disabled={isSelectEmpty}
+            >
+              Add
+            </button>
           </>
         }
       />
-      <ShoppingList column={column} data={shoppingList} />
+      <ShoppingList
+        column={column}
+        data={shoppingList}
+        onRemoveItem={handleRemoveItem}
+      />
     </div>
   );
 };
