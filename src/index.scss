@@ -34,6 +34,11 @@ input {
   &::placeholder {
     color: map.get($theme-colors, 'darkGray');
   }
+
+  &:focus-visible {
+    outline: 1px solid;
+    outline-color: map.get($theme-colors, 'addColor');
+  }
 }
 
 button {
