@@ -1,8 +1,9 @@
+@use 'sass:map';
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500&display=swap');
+@import './utils/variables';
 
 :root {
   font-family: 'Work Sans', sans-serif;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -13,7 +14,28 @@
 body {
   margin: 0;
   display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
+}
+
+input {
+  border: $border;
+  border-radius: $border-radius;
+  padding: $input-padding;
+  width: 100%;
+  font-size: $default-font-size;
+  color: map.get($theme-colors, 'darkGray');
+  text-transform: capitalize;
+}
+
+h1 {
+  font-size: 24px;
+}
+
+.shopping-cart-wrapper {
+  width: 780px;
+  border: $border;
+  border-radius: $border-radius;
+  box-shadow: $shadow;
+  margin: 50px 50px;
 }
