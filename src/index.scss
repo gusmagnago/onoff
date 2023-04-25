@@ -77,4 +77,12 @@ ul {
   background-color: map.get($theme-colors, 'addColor');
   color: map.get($theme-colors, 'white');
   width: 75px;
+
+  &:disabled {
+    background-color: map.get($theme-colors, 'darkGray');
+
+    span {
+      color: map.get($theme-colors, 'darkGray');
+    }
+  }
 }
