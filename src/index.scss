@@ -18,18 +18,43 @@ body {
   min-height: 100vh;
 }
 
+p,
+span,
+input {
+  color: map.get($theme-colors, 'main');
+}
+
 input {
   border: $border;
   border-radius: $border-radius;
   padding: $input-padding;
-  width: 100%;
   font-size: $default-font-size;
-  color: map.get($theme-colors, 'darkGray');
   text-transform: capitalize;
+}
+
+button {
+  color: map.get($theme-colors, 'main');
+  &:disabled {
+    cursor: not-allowed;
+    span {
+      color: map.get($theme-colors, 'darkGray');
+    }
+  }
+}
+
+button,
+li,
+a {
+  cursor: pointer;
 }
 
 h1 {
   font-size: 24px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
 }
 
 .shopping-cart-wrapper {

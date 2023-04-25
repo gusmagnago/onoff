@@ -4,4 +4,12 @@
 
 .child-wrapper {
   margin-top: 20px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: flex-start;
+
+  & input {
+    margin-right: 10px;
+  }
 }
