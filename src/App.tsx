@@ -29,8 +29,8 @@ const App = () => {
   };
 
   const column = [
-    { name: 'shopName', heading: 'shopName' },
     { name: 'itemName', heading: 'itemName' },
+    { name: 'shopName', heading: 'shopName' },
     { name: 'action', heading: '' },
   ];
 
