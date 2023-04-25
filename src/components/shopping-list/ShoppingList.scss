@@ -1,0 +1,31 @@
+@use 'sass:map';
+@import '../../utils/variables';
+
+.shopping-list {
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.shopping-list-row {
+  &:nth-of-type(odd) {
+    background-color: map.get($theme-colors, 'lightGray');
+  }
+}
+
+.first-row {
+  padding: 10px 0;
+  &:first-of-type {
+    padding-left: 40px;
+  }
+
+  button {
+    background-color: transparent;
+    text-transform: capitalize;
+    color: map.get($theme-colors, 'rmColor');
+
+    &:hover {
+      background-color: map.get($theme-colors, 'rmColor');
+      color: map.get($theme-colors, 'white');
+    }
+  }
+}

@@ -1,0 +1,25 @@
+@use 'sass:map';
+
+$theme-colors: (
+  'main': #273348,
+  'borderGray': #ecedee,
+  'darkGray': #9298a2,
+  'lightGray': #fbfbfb,
+  'addColor': #2dd08c,
+  'rmColor': #f54436,
+  'white': #fff,
+);
+
+@each $color, $value in $theme-colors {
+  :export {
+    $color: $value;
+  }
+}
+
+$border: 2px solid map.get($theme-colors, 'borderGray');
+$border-radius: 10px;
+$bttn-border-radius: 40px;
+$bttn-padding: 12px 22px;
+$padding: 14px 20px;
+$default-font-size: 16px;
+$shadow: 0px 4px 20px map.get($theme-colors, 'borderGray');

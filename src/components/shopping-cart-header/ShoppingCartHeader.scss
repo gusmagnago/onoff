@@ -1,0 +1,28 @@
+@use 'sass:map';
+@import '../../utils/variables';
+
+.wrapper {
+  padding: 40px 40px 20px;
+}
+
+.child-wrapper {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: flex-start;
+
+  & input,
+  button {
+    margin-right: 10px;
+  }
+
+  & button {
+    &:hover {
+      background-color: map.get($theme-colors, 'white');
+      color: map.get($theme-colors, 'addColor');
+      border: 1px solid;
+      border-color: map.get($theme-colors, 'addColor');
+    }
+  }
+}
