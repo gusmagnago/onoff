@@ -60,6 +60,7 @@ const App = () => {
               disabled={isInputEmpty}
               isLoading={isLoading}
             />
+            <button className='add-bttn'>Add</button>
           </>
         }
       />

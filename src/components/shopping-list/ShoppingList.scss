@@ -22,7 +22,6 @@
     background-color: transparent;
     text-transform: capitalize;
     color: map.get($theme-colors, 'rmColor');
-    padding: $padding;
 
     &:hover {
       background-color: map.get($theme-colors, 'rmColor');
