@@ -30,6 +30,10 @@ input {
   padding: $padding;
   font-size: $default-font-size;
   text-transform: capitalize;
+
+  &::placeholder {
+    color: map.get($theme-colors, 'darkGray');
+  }
 }
 
 button {
