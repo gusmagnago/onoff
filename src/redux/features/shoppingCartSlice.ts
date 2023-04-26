@@ -1,35 +1,37 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 export interface IShoppingList {
-  itemId: number;
-  itemName: string;
-  shopName: string;
+    itemId: number;
+    itemName: string;
+    shopName: string;
 }
 
 interface ShoppingItems {
-  items: IShoppingList[];
+    items: IShoppingList[];
 }
 
 const initialState: ShoppingItems = {
-  items: [],
+    items: [],
 };
 
 export const ShoppingCartSlice = createSlice({
-  name: 'shoppingItem',
-  initialState,
-  reducers: {
-    addItem: (state, action: PayloadAction<IShoppingList>) => {
-      state.items.push({
-        itemId: action.payload.itemId,
-        itemName: action.payload.itemName,
-        shopName: action.payload.shopName,
-      });
+    name: 'shoppingItem',
+    initialState,
+    reducers: {
+        addItem: (state, action: PayloadAction<IShoppingList>) => {
+            state.items.push({
+                itemId: action.payload.itemId,
+                itemName: action.payload.itemName,
+                shopName: action.payload.shopName,
+            });
+        },
+        removeItem: (state, action: PayloadAction<{ id: number }>) => {
+            const removeItem = state.items.filter(
+                (item) => item.itemId !== action.payload.id
+            );
+            state.items = removeItem;
+        },
     },
-    removeItem: (state, action: PayloadAction<{ id: number }>) => {
-      const removeItem = state.items.filter(item => item.itemId !== action.payload.id)
-      state.items = removeItem
-    }
-  },
 });
 
 export default ShoppingCartSlice.reducer;
