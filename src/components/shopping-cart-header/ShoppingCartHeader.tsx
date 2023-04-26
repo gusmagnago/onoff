@@ -13,7 +13,9 @@ const ShoppingCartHeader = ({
     return (
         <div className="wrapper" data-testid={dataTest}>
             <h1>{title}</h1>
-            <div className="child-wrapper">{children}</div>
+            <div className="child-wrapper" data-testid="child-wrapper">
+                {children}
+            </div>
         </div>
     );
 };
