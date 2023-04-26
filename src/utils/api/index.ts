@@ -1,4 +1,4 @@
-import { IShop } from "./types"
+import { IShop } from './types';
 
 export const fetchShops = async (): Promise<IShop[]> => {
     const response = await fetch('/shops.json');
