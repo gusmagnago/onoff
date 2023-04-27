@@ -1,7 +1,8 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { v4 as uuid } from 'uuid';
 
 export interface IShoppingList {
-    itemId: number;
+    itemId?: string;
     itemName: string;
     shopName: string;
 }
@@ -20,12 +21,12 @@ export const ShoppingCartSlice = createSlice({
     reducers: {
         addItem: (state, action: PayloadAction<IShoppingList>) => {
             state.items.push({
-                itemId: action.payload.itemId,
+                itemId: uuid(),
                 itemName: action.payload.itemName,
                 shopName: action.payload.shopName,
             });
         },
-        removeItem: (state, action: PayloadAction<{ id: number }>) => {
+        removeItem: (state, action: PayloadAction<{ id: string }>) => {
             const removeItem = state.items.filter(
                 (item) => item.itemId !== action.payload.id
             );

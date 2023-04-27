@@ -1,0 +1,27 @@
+[
+    {
+        "itemId": "84306613-1008-4820-bec7-8e6283f4b7d0",
+        "itemName": "Item 1",
+        "shopName": "Rimi"
+    },
+    {
+        "itemId": "fb98d476-27c2-478f-9f05-8dea460d747a",
+        "itemName": "PopCorn",
+        "shopName": "Selver"
+    },
+    {
+        "itemId": "b48f8d86-9311-49ff-b94a-e577b20f6df4",
+        "itemName": "Cat food",
+        "shopName": "Selver"
+    },
+    {
+        "itemId": "8c124927-e1af-46a5-8ac2-e6c5c2f87c33",
+        "itemName": "coffee beans",
+        "shopName": "Maxima"
+    },
+    {
+        "itemId": "457590af-fba1-400e-902c-2e807c2192fa",
+        "itemName": "item 1",
+        "shopName": "Rimi"
+    }
+]

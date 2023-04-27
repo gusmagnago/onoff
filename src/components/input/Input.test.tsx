@@ -16,10 +16,12 @@ describe('<Input/>', () => {
     it('Should change the value by user typing', async () => {
         const handleChange = jest.fn();
         render(<Input onChange={handleChange} />);
+
         const input = screen.getByTestId('input') as HTMLInputElement;
         const inputValue = 'Item 1';
 
         await userEvent.type(input, inputValue);
+
         expect(handleChange).toHaveBeenCalled();
         expect(input.value).toBe(inputValue);
     });

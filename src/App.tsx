@@ -8,14 +8,14 @@ import { IShop } from './utils/api/types';
 import { fetchShops } from './utils/api';
 import ShoppingList from './components/shopping-list/ShoppingList';
 import { useAppDispatch, useAppSelector } from './redux/store';
-import { addItem, removeItem } from './redux/features/shoppingCartSlice';
+import { addItem } from './redux/features/shoppingCartSlice';
 
 const App = () => {
     const [inputValue, setInputValue] = useState<string>('');
     const [open, setOpen] = useState<boolean>(false);
     const selectPlaceholder = 'Select shop';
     const [placeholder, setPlaceholder] = useState<string>(selectPlaceholder);
-    const [id, setId] = useState<number>(0);
+
     const { data, isLoading } = useQuery<IShop[]>('stores', fetchShops);
 
     const dispatch = useAppDispatch();
@@ -24,6 +24,8 @@ const App = () => {
         typeof inputValue === 'string' && inputValue.length === 0;
 
     const isSelectEmpty = placeholder === selectPlaceholder;
+
+    const shoppingList = useAppSelector((state) => state.items);
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         setInputValue(e.target.value);
@@ -34,15 +36,9 @@ const App = () => {
         setOpen(!open);
     };
 
-    const handleRemoveItem = () => {
-        dispatch(removeItem({ id }));
-    };
-
     const handleAddItem = () => {
-        setId((prev) => prev + 1);
         dispatch(
             addItem({
-                itemId: id,
                 itemName: inputValue,
                 shopName: placeholder,
             })
@@ -55,8 +51,6 @@ const App = () => {
         { name: 'itemName', heading: 'itemName' },
         { name: 'shopName', heading: 'shopName' },
     ];
-
-    const shoppingList = useAppSelector((state) => state.items);
 
     return (
         <div className="shopping-cart-wrapper">
@@ -87,11 +81,9 @@ const App = () => {
                     </>
                 }
             />
-            <ShoppingList
-                column={column}
-                data={shoppingList}
-                onRemoveItem={handleRemoveItem}
-            />
+            {shoppingList ? (
+                <ShoppingList column={column} data={shoppingList} />
+            ) : null}
         </div>
     );
 };

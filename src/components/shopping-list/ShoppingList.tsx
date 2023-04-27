@@ -1,40 +1,31 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { MouseEventHandler } from 'react';
 import './ShoppingList.scss';
+import { useAppDispatch } from '../../redux/store';
+import {
+    IShoppingList,
+    removeItem,
+} from '../../redux/features/shoppingCartSlice';
 
 interface IColumn {
     name: string;
     heading: string;
 }
 
-interface IData {
-    itemName: string;
-    shopName: string;
-    itemId: number;
-}
-
 const ShoppingList = ({
     column,
     data,
-    onRemoveItem,
+    'data-test': dataTest = 'shopping-list',
 }: {
     column: IColumn[];
-    data: IData[];
-    onRemoveItem: () => void;
+    data: IShoppingList[];
+    'data-test'?: string;
 }) => {
     return (
-        <table className="shopping-list">
+        <table className="shopping-list" data-testid={dataTest}>
             <tbody>
                 {data.map((item, index) => {
-                    return (
-                        <TableRow
-                            item={item}
-                            column={column}
-                            key={index}
-                            onRemoveItem={onRemoveItem}
-                        />
-                    );
+                    return <TableRow item={item} column={column} key={index} />;
                 })}
             </tbody>
         </table>
@@ -44,24 +35,39 @@ const ShoppingList = ({
 const TableRow = ({
     item,
     column,
-    onRemoveItem,
 }: {
     // type any because I couldnt find a better solution
     item: any;
     column: IColumn[];
-    onRemoveItem: MouseEventHandler<HTMLButtonElement>;
 }) => {
+    const dispatch = useAppDispatch();
+
     return (
-        <tr className="hopping-list shopping-list-row">
+        <tr
+            className="hopping-list shopping-list-row"
+            data-testid="shopping-item"
+        >
             {column.map((columnItem, index) => {
                 return (
-                    <td key={`item-${index}`} className="first-row">
+                    <td
+                        key={`item-${index}`}
+                        className="first-row"
+                        data-testid={`item-${index}`}
+                    >
                         {item[`${columnItem.name}`]}
                     </td>
                 );
             })}
-            <td key={`remove-${item.itemId}`} className="action-row">
-                <button onClick={onRemoveItem}>delete</button>
+            <td
+                key={`remove-${item.itemId}`}
+                className="action-row"
+                data-testid="delete-bttn"
+            >
+                <button
+                    onClick={() => dispatch(removeItem({ id: item.itemId }))}
+                >
+                    delete
+                </button>
             </td>
         </tr>
     );
