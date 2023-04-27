@@ -4,6 +4,7 @@ module.exports = {
     moduleNameMapper: {
         '\\.(svg)$': '<rootDir>./jest/mocks/mock-files.ts',
         '\\.(css|sass|scss)$': 'identity-obj-proxy',
+        "uuid": require.resolve('uuid'),
     },
     preset: 'ts-jest',
     transform: {
