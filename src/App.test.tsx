@@ -14,6 +14,11 @@ describe('<App />', () => {
                 </Provider>
             </QueryClientProvider>
         );
-        expect(screen.getByTestId('cart-header')).toBeInTheDocument();
+
+        const shoppingHeader = screen.getByTestId('cart-header');
+        const shoppingList = screen.getByTestId('shopping-list');
+
+        expect(shoppingHeader).toBeInTheDocument();
+        expect(shoppingList).toBeInTheDocument();
     });
 });
