@@ -26,7 +26,7 @@ describe('<Select />', () => {
             <Select
                 placeholder={''}
                 open={false}
-                shopNameList={undefined}
+                shopNameList={[]}
                 isLoading={false}
                 onClick={handleClick}
                 onSelect={jest.fn()}

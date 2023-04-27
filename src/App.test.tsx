@@ -1,24 +1,23 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import App from './App';
-import { QueryClient, QueryClientProvider } from 'react-query';
+
 import { store } from './redux/store';
 import { Provider } from 'react-redux';
 
 describe('<App />', () => {
-    it('Should render the title of the app', () => {
-        const queryClient = new QueryClient();
+    it('Should render the title of the app', async () => {
         render(
-            <QueryClientProvider client={queryClient}>
-                <Provider store={store}>
-                    <App />
-                </Provider>
-            </QueryClientProvider>
+            <Provider store={store}>
+                <App />
+            </Provider>
         );
 
         const shoppingHeader = screen.getByTestId('cart-header');
         const shoppingList = screen.getByTestId('shopping-list');
 
-        expect(shoppingHeader).toBeInTheDocument();
-        expect(shoppingList).toBeInTheDocument();
+        await waitFor(() => {
+            expect(shoppingHeader).toBeInTheDocument();
+            expect(shoppingList).toBeInTheDocument();
+        });
     });
 });

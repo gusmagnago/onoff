@@ -1,14 +1,11 @@
-import { ChangeEvent, MouseEvent, useState } from 'react';
+import { ChangeEvent, MouseEvent, useEffect, useState } from 'react';
 import Input from './components/input/Input';
 import ShoppingCartHeader from './components/shopping-cart-header/ShoppingCartHeader';
 import Select from './components/select/Select';
 
-import { useQuery } from 'react-query';
-import { IShop } from './utils/api/types';
-import { fetchShops } from './utils/api';
 import ShoppingList from './components/shopping-list/ShoppingList';
 import { useAppDispatch, useAppSelector } from './redux/store';
-import { addItem } from './redux/features/shoppingCartSlice';
+import { addItem, fetchShopList } from './redux/features/shoppingCartSlice';
 
 const App = () => {
     const [inputValue, setInputValue] = useState<string>('');
@@ -16,16 +13,18 @@ const App = () => {
     const selectPlaceholder = 'Select shop';
     const [placeholder, setPlaceholder] = useState<string>(selectPlaceholder);
 
-    const { data, isLoading } = useQuery<IShop[]>('stores', fetchShops);
-
     const dispatch = useAppDispatch();
+
+    const { shopList, items, status, error } = useAppSelector((state) => state);
 
     const isInputEmpty =
         typeof inputValue === 'string' && inputValue.length === 0;
 
     const isSelectEmpty = placeholder === selectPlaceholder;
 
-    const shoppingList = useAppSelector((state) => state.items);
+    useEffect(() => {
+        dispatch(fetchShopList());
+    }, [dispatch]);
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         setInputValue(e.target.value);
@@ -65,11 +64,11 @@ const App = () => {
                         <Select
                             placeholder={placeholder}
                             open={open}
-                            shopNameList={data && data}
+                            shopNameList={shopList}
                             onClick={() => setOpen(!open)}
                             onSelect={(e) => handleSelectShop(e)}
                             disabled={isInputEmpty}
-                            isLoading={isLoading}
+                            isLoading={status === 'loading'}
                         />
                         <button
                             className="add-bttn"
@@ -81,8 +80,8 @@ const App = () => {
                     </>
                 }
             />
-            {shoppingList ? (
-                <ShoppingList column={column} data={shoppingList} />
+            {items && !error ? (
+                <ShoppingList column={column} data={items} />
             ) : null}
         </div>
     );

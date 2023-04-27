@@ -17,7 +17,7 @@ const Select = ({
 }: {
     placeholder: string;
     open?: boolean;
-    shopNameList: IShop[] | undefined;
+    shopNameList: IShop[];
     isLoading: boolean;
     onClick: MouseEventHandler<HTMLButtonElement>;
     onSelect: MouseEventHandler<HTMLUListElement>;
@@ -25,8 +25,8 @@ const Select = ({
     'data-test'?: string;
     'data-test-item'?: string;
 }) => {
-    const sortedShopNameList = shopNameList?.sort(
-        (a, b) => a.sortOrder - b.sortOrder
+    const sortedShopNameList = [...shopNameList].sort(
+        (a, b) => a.sortOrder + b.sortOrder
     );
 
     if (!shopNameList || isLoading) {
