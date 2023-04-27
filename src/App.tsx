@@ -73,7 +73,7 @@ const App = () => {
                         <button
                             className="add-bttn"
                             onClick={handleAddItem}
-                            disabled={isSelectEmpty}
+                            disabled={isInputEmpty || isSelectEmpty}
                         >
                             Add
                         </button>

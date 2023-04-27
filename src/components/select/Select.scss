@@ -2,39 +2,39 @@
 @import '../../utils/variables';
 
 .select {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: map.get($theme-colors, 'white');
-  border: $border;
-  border-radius: $border-radius;
-  padding: $padding;
-  width: 260px;
-  font-size: $default-font-size;
-  color: map.get($theme-colors, 'darkGray');
-  text-transform: capitalize;
-  overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: map.get($theme-colors, 'white');
+    border: $border;
+    border-radius: $border-radius;
+    padding: $padding;
+    width: 260px;
+    font-size: $default-font-size;
+    color: map.get($theme-colors, 'darkGray');
+    text-transform: capitalize;
+    overflow: hidden;
 
-  svg {
-    width: 11px;
-  }
+    svg {
+        width: 11px;
+    }
 }
 
 .select-options {
-  position: absolute;
-  border: $border;
-  border-radius: $border-radius;
-  width: auto;
-  background-color: map.get($theme-colors, 'white');
-
-  li {
+    position: absolute;
+    border: $border;
+    border-radius: $border-radius;
+    width: auto;
+    background-color: map.get($theme-colors, 'white');
     width: 260px;
-    padding: 10px 0;
-    padding-left: 20px;
-    border-radius: inherit;
 
-    &:hover {
-      background-color: map.get($theme-colors, 'lightGray');
+    li {
+        padding: 10px 0;
+        padding-left: 20px;
+        border-radius: inherit;
+
+        &:hover {
+            background-color: map.get($theme-colors, 'lightGray');
+        }
     }
-  }
 }
